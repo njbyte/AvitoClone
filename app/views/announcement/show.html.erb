@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<% if @announcement %>
+  <div class="announcement-details">
+    <h1><%= @announcement.title %></h1>
+    
+    <!-- Price and Condition -->
+    <div class="price-condition">
+      <span class="price"><%= number_to_currency(@announcement.price, unit: @announcement.currency) %></span>
+      <span class="condition"><%= @announcement.condition %></span>
+    </div>
+    
+    <!-- Images Gallery -->
+    <% if @announcement.images.attached? %>
+  <div class="image-gallery">
+    <h3>Product Images</h3>
+    <div class="images-container">
+      <% @announcement.images.each do |image| %>
+        <div class="image-item">
+          <%= image_tag image.variant(resize_to_limit: [500, 500]), class: "announcement-image" %>
+          
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+    
+    <!-- Other details -->
+    <div class="meta">
+      <span class="category"><%= @announcement.category %> / <%= @announcement.subcategory %></span>
+      <span class="location"><%= @announcement.city %>, <%= @announcement.region %></span>
+      <span class="published">Published <%= time_ago_in_words(@announcement.published_at) %> ago</span>
+      <span class="views"><%= @announcement.views_count %> views</span>
+    </div>
+    
+    <div class="description">
+      <h3>Description</h3>
+      <%= simple_format(@announcement.description) %>
+    </div>
+    
+   
+    
+    <!-- Seller Information -->
+    <div class="seller-info">
+      <h3>Seller Information</h3>
+      <p><strong>Name:</strong> <%= @announcement.seller_name %></p>
+      <p><strong>Phone:</strong> <%= @announcement.phone_number %></p>
+      <p><strong>Email:</strong> <%= mail_to @announcement.email %></p>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <%= link_to 'Edit', edit_announcement_path(@announcement), class: "btn btn-edit" %>
+    <%= link_to 'Back', announcement_index_path, class: "btn btn-back" %>
+  </div>
+<% else %>
+  <p class="alert">Announcement not found</p>
+  <%= link_to 'Back to announcements', announcement_index_path, class: "btn btn-back" %>
+<% end %>

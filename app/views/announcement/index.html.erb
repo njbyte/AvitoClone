@@ -1,0 +1,40 @@
+<h1>Announcements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>City</th>
+      <th>Published</th>
+      <th>Views</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @announcements.each do |announcement| %>
+      <tr>
+        <td><%= announcement.title %></td>
+        <td><%= number_to_currency(announcement.price, unit: announcement.currency) %></td>
+        <td><%= announcement.city %></td>
+        <td><%= time_ago_in_words(announcement.published_at) %> ago</td>
+        <td><%= announcement.views_count %></td>
+        <td><%= link_to 'Show', announcement_path(announcement) %></td>
+        <td><%= link_to 'Edit', edit_announcement_path(announcement) %></td>
+        <td>
+  <%= button_to 'Delete', announcement_path(announcement), 
+      method: :delete, 
+      data: { confirm: 'Are you sure?' }, 
+      class: "btn btn-danger" %>
+</td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Announcement', new_announcement_path %>

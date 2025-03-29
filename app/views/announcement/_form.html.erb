@@ -1,0 +1,118 @@
+<%= form_with(model: announcement, 
+              url: announcement.persisted? ? announcement_path(announcement) : announcement_index_path, 
+              local: true) do |form| %>
+    <% if announcement.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(announcement.errors.count, "error") %> prohibited this announcement from being saved:</h2>
+        <ul>
+          <% announcement.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, required: true %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, rows: 5 %>
+    </div>
+  
+    <div class="field-group">
+      <div class="field">
+        <%= form.label :price %>
+        <%= form.number_field :price, step: 0.01 %>
+      </div>
+      <div class="field">
+        <%= form.label :currency %>
+        <%= form.select :currency, ['USD', 'EUR', 'GBP', 'JPY', 'CAD'] %>
+      </div>
+      <div class="field">
+        <%= form.label :condition %>
+        <%= form.select :condition, ['New', 'Used', 'Refurbished'] %>
+      </div>
+    </div>
+  
+    <div class="field-group">
+      <div class="field">
+        <%= form.label :category %>
+        <%= form.text_field :category %>
+      </div>
+      <div class="field">
+        <%= form.label :subcategory %>
+        <%= form.text_field :subcategory %>
+      </div>
+    </div>
+  
+    <div class="field-group">
+      <div class="field">
+        <%= form.label :city %>
+        <%= form.text_field :city %>
+      </div>
+      <div class="field">
+        <%= form.label :region %>
+        <%= form.text_field :region %>
+      </div>
+    </div>
+  
+    <div class="field-group">
+      <div class="field">
+        <%= form.label :seller_name %>
+        <%= form.text_field :seller_name %>
+      </div>
+      <div class="field">
+        <%= form.label :phone_number %>
+        <%= form.telephone_field :phone_number %>
+      </div>
+      <div class="field">
+        <%= form.label :email %>
+        <%= form.email_field :email %>
+      </div>
+    </div>
+  
+    <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true, direct_upload: true %>
+    <% if announcement.images.attached? %>
+      <div class="existing-images">
+        <% announcement.images.each do |image| %>
+          <%= image_tag image.variant(resize_to_limit: [500, 500]), class: "announcement-image" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  
+  
+    <div class="field">
+      <%= form.label :video_url %>
+      <%= form.url_field :video_url %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :expires_at %>
+      <%= form.date_field :expires_at %>
+    </div>
+  
+    <div class="field-group">
+      <div class="field">
+        <%= form.label :status %>
+        <%= form.select :status, ['active', 'pending', 'expired', 'sold'] %>
+      </div>
+      <div class="field">
+        <%= form.label :is_featured %>
+        <%= form.check_box :is_featured %>
+      </div>
+      <div class="field">
+        <%= form.label :is_verified %>
+        <%= form.check_box :is_verified %>
+      </div>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
