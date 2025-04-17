@@ -1,6 +1,6 @@
 class AnnouncementController < ApplicationController
     before_action :set_announcement, only: [:edit, :update, :destroy]
-  
+    before_action :authenticated, except: [:show, :index]
     def index
       @announcements = Announcement.all
     end
@@ -60,6 +60,17 @@ class AnnouncementController < ApplicationController
         :status, :is_featured, :is_verified,
         images: []  # Permit multiple image uploads
       )
+    end
+private 
+def current_user
+  # This depends on how you store user sessions.
+  # Example if using session[:user_id]
+  @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+end
+    def require_login
+      unless current_user
+        redirect_to root_path, alert: "You must be logged in to access this page."
+      end
     end
   end
   

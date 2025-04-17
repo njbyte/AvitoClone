@@ -1,11 +1,47 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<%= render 'layouts/navbar' %>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
+<%= tag.div(flash[:alert], class: "alert alert-danger") if flash[:alert] %>
+<%= tag.div(flash[:notice], class: "alert alert-success") if flash[:notice] %>
 
-<%= link_to "Forgot password?", new_password_path %>
+<div class="login-page-container">
+  <div class="hero-section">
+    <div class="hero-image">
+      <%= image_tag 'avitoleft.png', alt: 'Avito marketplace illustration' %>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <h2>Connectez-vous à Avito</h2>
+    <p class="login-description">Entrez vos coordonnées ci-dessous</p>
+
+    <%= form_with url: session_path, local: true do |form| %>
+      <div class="form-section">
+        <%= form.label :phone_number, "Email", class: "form-label" %>
+        <div class="phone-example"></div>
+        <%= form.text_field :email_address, 
+                          required: true, 
+                          class: "form-control",
+                          placeholder: "Entrez votre Email" %>
+      </div>
+
+      <div class="form-section">
+        <%= form.label :password, "Mot de passe", class: "form-label" %>
+        <%= form.password_field :password, 
+                              required: true, 
+                              class: "form-control",
+                              placeholder: "Entrez votre mot de passe", 
+                              maxlength: 72 %>
+        <%= link_to "Mot de passe oublié ?", new_password_path, class: "forgot-password" %>
+      </div>
+      
+      <%= form.submit "Continuer", class: "continue-btn" %>
+    <% end %>
+
+    <div class="or-divider">Ou avec</div>
+    
+   
+    <div class="shop-link">
+      Vous avez une boutique Avito?
+    </div>
+  </div>
+</div>

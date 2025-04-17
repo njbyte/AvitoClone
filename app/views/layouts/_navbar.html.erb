@@ -1,0 +1,7 @@
+<!-- app/views/layouts/_navigation.html.erb -->
+<p>Navigation</p>
+<% if authenticated? %>
+  <%= button_to "Logout", session_path, method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "Login", new_session_path, class: "btn btn-primary" %>
+<% end %>

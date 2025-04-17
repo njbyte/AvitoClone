@@ -1,4 +1,6 @@
 class Announcement < ApplicationRecord
+
+    
     # Active Storage attachments (for image uploads)
     has_many_attached :images
   

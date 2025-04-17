@@ -1,10 +1,192 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+/* Main container */
+.login-page-container {
+    display: flex;
+    height: 100vh; /* Full screen height */
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 0 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    overflow: hidden; /* Disable scrolling */
+  }
+  
+  /* Hero section with image */
+  .hero-section {
+    max-width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin: 0 15px;
+  }
+  
+  .hero-section h1 {
+    font-size: 28px;
+    color: #2a41e8;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  .hero-text {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Login container */
+  .login-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 15px;
+  }
+  
+  .login-container h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #333;
+  }
+  
+  .login-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Form elements */
+  .form-section {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+    font-weight: bold;
+  }
+  
+  .phone-example {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 5px;
+  }
+  
+  .forgot-password {
+    font-size: 14px;
+    color: #2a41e8;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  .continue-btn {
+    background-color: #2a41e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  .continue-btn:hover {
+    background-color: #1a30d0;
+  }
+  
+  /* Divider and Google button */
+  .or-divider {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .or-divider::before,
+  .or-divider::after {
+    content: "";
+    display: inline-block;
+    width: 40%;
+    height: 1px;
+    background-color: #ddd;
+    position: absolute;
+    top: 50%;
+  }
+  
+  .or-divider::before {
+    left: 0;
+  }
+  
+  .or-divider::after {
+    right: 0;
+  }
+  
+  .shop-link {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Form controls */
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .login-page-container {
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      padding: 10px;
+      overflow: hidden;
+    }
+  
+    .hero-section,
+    .login-container {
+      padding: 10px;
+      margin: 10px 0;
+      max-width: 100%;
+    }
+  
+    .hero-text {
+      font-size: 15px;
+    }
+  
+    .login-container h2 {
+      font-size: 20px;
+    }
+  }
+  
