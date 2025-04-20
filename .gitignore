@@ -34,3 +34,5 @@
 /config/master.key
 /config/database.yml    
 /.docx
+/app/assets/builds/*
+!/app/assets/builds/.keep

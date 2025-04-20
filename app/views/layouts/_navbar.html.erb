@@ -1,7 +1,92 @@
-<!-- app/views/layouts/_navigation.html.erb -->
-<p>Navigation</p>
-<% if authenticated? %>
-  <%= button_to "Logout", session_path, method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger" %>
-<% else %>
-  <%= link_to "Login", new_session_path, class: "btn btn-primary" %>
-<% end %>
+<style>
+  .navbar {
+    background-color: #f7f0e8;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    gap: 20px;
+  }
+
+  .navbar-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-section.left {
+    flex: 1;
+  }
+
+  .navbar-section.center {
+    flex: 2;
+    justify-content: center;
+  }
+
+  .navbar-section.right {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1em;
+  }
+
+  .btn-nav {
+    padding: 8px 14px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-nav:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+</style>
+
+<div class="navbar">
+  <!-- Left: Logo -->
+  <div class="navbar-section left">
+    <%= link_to "MyAvito", root_path, class: "logo" %>
+  </div>
+
+  <!-- Center: Search -->
+  <div class="navbar-section center">
+    <input type="text" placeholder="Search announcements..." class="search-input">
+  </div>
+
+  <!-- Right: Buttons -->
+  <div class="navbar-section right">
+    <%= link_to 'New Announcement', new_announcement_path, class: "btn-nav" %>
+
+    <% if authenticated? %>
+      <%= button_to "Logout", session_path, method: :delete, data: { turbo_method: :delete }, class: "btn-nav btn-danger" %>
+    <% else %>
+      <%= link_to "Login", new_session_path, class: "btn-nav" %>
+    <% end %>
+  </div>
+</div>

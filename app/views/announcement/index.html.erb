@@ -1,41 +1,174 @@
-<%= render 'layouts/navbar' %>
-<h1>Announcements</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Price</th>
-      <th>City</th>
-      <th>Published</th>
-      <th>Views</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @announcements.each do |announcement| %>
-      <tr>
-        <td><%= announcement.title %></td>
-        <td><%= number_to_currency(announcement.price, unit: announcement.currency) %></td>
-        <td><%= announcement.city %></td>
-        <td><%= time_ago_in_words(announcement.published_at) %> ago</td>
-        <td><%= announcement.views_count %></td>
-        <td><%= link_to 'Show', announcement_path(announcement) %></td>
-        <td><%= link_to 'Edit', edit_announcement_path(announcement) %></td>
-        <td>
-  <%= button_to 'Delete', announcement_path(announcement), 
-      method: :delete, 
-      data: { confirm: 'Are you sure?' }, 
-      class: "btn btn-danger" %>
-</td>
 
 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fdf6f0;
+  }
 
-<br>
+  .layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
 
-<%= link_to 'New Announcement', new_announcement_path %>
+  .navbar {
+    background-color: #f7f0e8;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .sidebar-left, .sidebar-right {
+    width: 200px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .sidebar-left {
+    flex-shrink: 0;
+  }
+
+  .sidebar-right {
+    flex-shrink: 0;
+  }
+
+  .content {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow-y: auto;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+  }
+
+  .card {
+    background: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+  .card-body h3 {
+    margin: 0 0 8px;
+    font-size: 1.1em;
+  }
+
+  .card-body p {
+    margin: 4px 0;
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 0.85em;
+  }
+
+  .card-actions a, .card-actions form {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .btn-new {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+</style>
+
+<div class="layout">
+  <!-- Navbar -->
+
+   <%= render 'layouts/navbar' %>
+
+
+  <!-- Main Content Area -->
+  <div class="main">
+    <!-- Sidebar Left (Filters) -->
+    <div class="sidebar-left">
+      <h3>Filters</h3>
+      <p>City, Price, etc.</p>
+    </div>
+
+    <!-- Center Content (Announcements) -->
+    <div class="content">
+      <h1>Announcements</h1>
+
+      <div class="card-grid">
+        <% @announcements.each do |announcement| %>
+          <div class="card">
+            <% if announcement.images.attached? %>
+              <%= image_tag announcement.images.first.variant(resize_to_fill: [400, 250]), class: "card-img" %>
+            <% else %>
+              <div class="no-image" style="height:160px; background:#ddd; text-align:center; line-height:160px; color:#777;">No Image</div>
+            <% end %>
+
+            <div class="card-body">
+              <h3><%= announcement.title %></h3>
+              <p><strong>Price:</strong> <%= number_to_currency(announcement.price, unit: announcement.currency) %></p>
+              <p><strong>City:</strong> <%= announcement.city %></p>
+              <p><%= time_ago_in_words(announcement.published_at) %> ago</p>
+              <p>Views: <%= announcement.views_count %></p>
+            </div>
+
+            <div class="card-actions">
+              <%= link_to 'Show', announcement_path(announcement) %>
+              <%= link_to 'Edit', edit_announcement_path(announcement) %>
+              <%= button_to 'Delete', announcement_path(announcement), method: :delete, data: { confirm: 'Are you sure?' }, form: { style: 'display:inline;' } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <%= link_to 'New Announcement', new_announcement_path, class: "btn-new" %>
+    </div>
+
+    <!-- Sidebar Right (Suggestions) -->
+    <div class="sidebar-right">
+      <h3>Suggestions</h3>
+      <ul style="padding-left: 16px;">
+        <li>Related search</li>
+        <li>Trending items</li>
+        <li>Popular cities</li>
+      </ul>
+    </div>
+  </div>
+</div>
