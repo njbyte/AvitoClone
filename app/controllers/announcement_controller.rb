@@ -1,6 +1,8 @@
 class AnnouncementController < ApplicationController
     before_action :set_announcement, only: [:edit, :update, :destroy]
-    before_action :authenticated, except: [:show, :index]
+    before_action :authenticated?, except: [:show, :index]
+    allow_unauthenticated_access only: [:index, :show] 
+
     def index
       @announcements = Announcement.all
     end
