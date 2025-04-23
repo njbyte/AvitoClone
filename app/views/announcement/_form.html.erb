@@ -1,3 +1,117 @@
+<style>
+/* Container styles */
+form {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+}
+
+/* Headings & error box */
+#error_explanation {
+  background-color: #ffe5e5;
+  border-left: 5px solid #e53935;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#error_explanation h2 {
+  margin-top: 0;
+  color: #b71c1c;
+  font-size: 1.1rem;
+}
+
+#error_explanation ul {
+  padding-left: 20px;
+  color: #b71c1c;
+}
+
+/* Grouping fields */
+.field-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.field-group .field {
+  flex: 1 1 200px;
+}
+
+/* Individual fields */
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* File upload */
+.existing-images {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.announcement-image {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+
+/* Actions */
+.actions {
+  text-align: right;
+  margin-top: 30px;
+}
+
+.actions input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+</style>
+
 <%= form_with(model: announcement, 
               url: announcement.persisted? ? announcement_path(announcement) : announcement_index_path, 
               local: true) do |form| %>
@@ -39,12 +153,16 @@
   
     <div class="field-group">
       <div class="field">
-        <%= form.label :category %>
-        <%= form.text_field :category %>
+      <%= form.label :category %>
+      <%# Changed from text_field to select %>
+      <%= form.select :category, ['Market', 'Vehicules', 'Immobilier', 'Entreprise'], { prompt: "Select a category" }, { id: 'category-select' } %> <%# Added id %>
+   
       </div>
       <div class="field">
-        <%= form.label :subcategory %>
-        <%= form.text_field :subcategory %>
+      <%= form.label :subcategory %>
+      <%# Changed from text_field to select %>
+      <%= form.select :subcategory, [], { prompt: "Select a subcategory" }, { id: 'subcategory-select' } %> <%# Added id %>
+    
       </div>
     </div>
   
@@ -115,4 +233,40 @@
     <div class="actions">
       <%= form.submit %>
     </div>
+    
   <% end %>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const categorySelect = document.getElementById('category-select');
+  const subcategorySelect = document.getElementById('subcategory-select');
+
+  if (!categorySelect || !subcategorySelect) return;
+
+  const subcategories = {
+    'Vehicules': ['voiture', 'moto', 'velo', 'bateau', 'camion'],
+    'Immobilier': ['vente', 'location', 'colocation', 'location de vacance'],
+    'Market': ['informatique', 'equipement bebe', 'maison jardin', 'animalerie', 'jardin', 'habillement', 'sport'],
+    'Entreprise': ['emploi', 'service', 'stage', 'buisness']
+  };
+
+  function updateSubcategories() {
+    const selectedCategory = categorySelect.value;
+    const availableSubcategories = subcategories[selectedCategory] || [];
+
+    subcategorySelect.innerHTML = '<option value="">Select a subcategory</option>';
+
+    availableSubcategories.forEach(subcategory => {
+      const option = document.createElement('option');
+      option.value = subcategory;
+      option.textContent = subcategory;
+      subcategorySelect.appendChild(option);
+    });
+  }
+
+  categorySelect.addEventListener('change', updateSubcategories);
+
+  updateSubcategories();
+});
+</script>

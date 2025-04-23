@@ -1,7 +1,12 @@
 <style>
+.logo-img {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+  }
   .navbar {
-    background-color: #f7f0e8;
-    padding: 15px 25px;
+    background-color: #ffffff;
+    padding: 5px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,9 +75,9 @@
 
 <div class="navbar">
   <!-- Left: Logo -->
-  <div class="navbar-section left">
-    <%= link_to "MyAvito", root_path, class: "logo" %>
-  </div>
+  <%= link_to root_path, class: "logo" do %>
+    <%= image_tag "new-logo.svg", alt: "MyAvito", class: "logo-img" %>
+  <% end %>
 
   <!-- Center: Search -->
   <div class="navbar-section center">
