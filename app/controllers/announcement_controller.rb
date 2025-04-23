@@ -4,7 +4,11 @@ class AnnouncementController < ApplicationController
     allow_unauthenticated_access only: [:index, :show] 
 
     def index
-      @announcements = Announcement.all
+      if params[:category].present?
+        @announcements = Announcement.where(category: params[:category])
+      else
+        @announcements = Announcement.all
+      end
     end
   
     def new
