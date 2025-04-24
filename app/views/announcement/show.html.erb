@@ -16,6 +16,7 @@ body {
 .actions {
   display: flex;
   gap: 15px;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
@@ -29,7 +30,7 @@ body {
 }
 
 .btn-edit {
-  background-color: #007bff;
+  background-color: #FF4C59;
   color: white;
 }
 
@@ -144,8 +145,10 @@ body {
 
   <!-- Top Buttons -->
   <div class="actions">
-    <%= link_to 'Edit', edit_announcement_path(@announcement), class: "btn btn-edit" %>
-    <%= link_to 'Back', announcement_index_path, class: "btn btn-back" %>
+  <%= link_to 'Back', announcement_index_path, class: "btn btn-back" %>
+   <% if authenticated? %>
+  <%= link_to 'Edit', edit_announcement_path(@announcement), class: "btn btn-edit" %>
+    <% end %>
   </div>
 
   <!-- Announcement Box -->

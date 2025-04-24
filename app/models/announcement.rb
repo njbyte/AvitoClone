@@ -3,7 +3,7 @@ class Announcement < ApplicationRecord
     
     # Active Storage attachments (for image uploads)
     has_many_attached :images
-  
+    belongs_to :user
     # Validations
     validates :title, :description, :price, :category, :city, :seller_name, :phone_number, presence: true
     validates :price, numericality: { greater_than_or_equal_to: 0 }
