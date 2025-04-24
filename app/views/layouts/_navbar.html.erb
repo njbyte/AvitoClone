@@ -20,6 +20,7 @@
       width: 100px;
       height: auto;
       margin-right: 10px;
+      margin-left: 50px;
     }
     .navbar {
       background-color: #ffffff;
@@ -91,7 +92,7 @@
       background-color: #c82333;
     }
     .publish-button {
-      height: 22px;
+      height: 18px;
       width: 205px;
       display: inline-flex;
       align-items: center;
@@ -108,11 +109,12 @@
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-right: 20px;
       
       }
 
       .publish-button:hover {
-        background-color: #016534; /* Slightly darker green on hover */
+        background-color: #f21010; /* Slightly darker green on hover */
         transform: translateY(-1px);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       }
@@ -120,6 +122,81 @@
       .publish-button i {
         font-size: 1.2em;
       }
+
+
+.navbar-announce-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.navbar-announce-link:hover {
+  background-color: #FFC71F;
+}
+
+.navbar-announce-icon {
+  width: 18px;
+  height: 18px;
+}
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 1em;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.logout-button span {
+  font-weight: 500;
+}
+
+.logout-icon {
+  width: 18px;
+  height: 18px;
+}
+.login-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 1em;
+  padding: 8px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.login-icon {
+  width: 18px;
+  height: 18px;
+}
+
 </style>
 
 <div class="navbar">
@@ -133,16 +210,28 @@
 
   <!-- Right: Buttons -->
   <div class="navbar-section right">
+  <% if authenticated? %>
+  <%= link_to myannounce_announcement_index_path, class: "navbar-announce-link" do %>
+    <%= image_tag "icons/announce.svg", alt: "Mes annonces", class: "navbar-announce-icon" %>
+    <span>Mes annonces</span>
+  <% end %>
     
-    <% if authenticated? %>
-      <%= button_to "Se Déconnecter", session_path, method: :delete, data: { turbo_method: :delete }, class: "loginlink" %>
-    <% else %>
-      <%= link_to "Se connecter", new_session_path , class: "loginlink" %>
-    <% end %>
-    <%= link_to new_announcement_path, class: "publish-button" do %>
+     <%= link_to new_announcement_path, class: "publish-button" do %>
   <%= image_tag "icons/add_icon.svg", alt: "addicon", style: "width: 20px; height: 20px;" %>
 
   <span>Publier une annonce</span>
 <% end %>
+    <%= button_to session_path, method: :delete, data: { confirm: "Êtes-vous sûr de vouloir vous déconnecter ?" }, class: "logout-button", form: { style: "display: inline;" } do %>
+  <%= image_tag "icons/logout.svg", alt: "Logout", class: "logout-icon" %>
+  <span>Se Déconnecter</span>
+<% end %>
+
+    <% else %>
+    <%= link_to new_session_path, class: "login-button" do %>
+      <%= image_tag "icons/login.svg", alt: "Login", class: "login-icon" %>
+      <span>Se connecter</span>
+    <% end %>
+    <% end %>
+   
   </div>
 </div>

@@ -7,6 +7,7 @@ class AnnouncementController < ApplicationController
     def index
       if params[:category].present?
         @announcements = Announcement.where(category: params[:category])
+      
       else
         @announcements = Announcement.all
       end
@@ -16,7 +17,9 @@ class AnnouncementController < ApplicationController
       @announcement = Announcement.new
     end
 
-
+    def myannounce
+      @announcements = Announcement.where(user_id: session[:user_id])
+    end
     def show
       @announcement = Announcement.find(params[:id])
       @announcement.increment!(:views_count)
