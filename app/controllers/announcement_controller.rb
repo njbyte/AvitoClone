@@ -2,7 +2,7 @@ class AnnouncementController < ApplicationController
     before_action :set_announcement, only: [:edit, :update, :destroy]
     before_action :authenticated?, except: [:show, :index]
     allow_unauthenticated_access only: [:index, :show] 
-
+    
     def index
       if params[:category].present?
         @announcements = Announcement.where(category: params[:category])
@@ -67,6 +67,7 @@ class AnnouncementController < ApplicationController
         images: []  # Permit multiple image uploads
       )
     end
+
 private 
 def current_user
   # This depends on how you store user sessions.

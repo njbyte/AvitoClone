@@ -1,345 +1,181 @@
 <style>
-  .announcement-form {
+.{
+  font-family: 'Inter', sans-serif;
+}
+  .announcement-wrapper {
     max-width: 800px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
     border-radius: 10px;
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     font-family: Arial, sans-serif;
   }
 
-  .announcement-form-error {
-    background-color: #ffe5e5;
-    border-left: 5px solid #e53935;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+  .form-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    
   }
 
-  .announcement-form-error h2 {
-    margin-top: 0;
-    color: #b71c1c;
-    font-size: 1.1rem;
+  .form-subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
   }
 
-  .announcement-form-error ul {
-    padding-left: 20px;
-    color: #b71c1c;
+  .form-group {
+    margin-bottom: 1rem;
   }
 
-  .announcement-form-group {
+  .form-row {
     display: flex;
+    gap: 1rem;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 20px;
   }
 
-  .announcement-form-field {
-    flex: 1 1 200px;
-    margin-bottom: 20px;
-  }
-
-  .announcement-form-field label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #333;
-  }
-
-  .announcement-form-field input,
-  .announcement-form-field select,
-  .announcement-form-field textarea {
+  .form-control {
     width: 100%;
-    padding: 10px 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease;
+    border-radius: 6px;
   }
 
-  .announcement-form-field input:focus,
-  .announcement-form-field select:focus,
-  .announcement-form-field textarea:focus {
-    border-color: #007bff;
-    outline: none;
+  .btn-primary {
+    background-color: #ff5a5f;
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
   }
 
-  .announcement-form-images {
+  .btn-primary:hover {
+    background-color: #e6494f;
+  }
+
+  .image-carousel {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 10px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
   }
 
-  .announcement-form-image {
-    width: 100px;
-    height: auto;
-    border-radius: 5px;
+  .carousel-image-wrapper {
+    flex: 0 0 auto;
+  }
+
+  .carousel-image {
+    border-radius: 8px;
     border: 1px solid #ddd;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
   }
-
-  .announcement-form-actions {
-    text-align: right;
-    margin-top: 30px;
-  }
-
-  .announcement-form-actions input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-
-  .announcement-form-actions input[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  .info-box {
-  max-width: 400px;
-  height: auto;
-  margin: 40px 150px 0px 0px;
-  padding: 20px;
-  background-color: #f9f9f9;
+  .form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
   font-family: Arial, sans-serif;
 }
-.form-card {
-  background-color: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  min-width: 600px;
-}
-.info-title {
-  font-size: 18px;
+
+.form-title {
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  color: #333;
+  margin-bottom: 0.5rem;
 }
 
-.info-content {
-  background-color: #e8f0ff;
-  border-left: 4px solid #3b82f6;
-  padding: 15px;
+.form-subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.carousel-image-wrapper {
+  flex: 0 0 auto;
+}
+
+.carousel-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
   border-radius: 8px;
-  font-size: 14px;
-  color: #333;
+  border: 1px solid #ccc;
 }
 
-.info-content p {
-  margin-bottom: 10px;
-}
-
-.info-footer {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.info-footer a {
-  text-decoration: underline;
-  color: #000;
-  font-size: 13px;
-}
-.maincontainer {
-  display: flex;
-  justify-content: center;
-  gap: 10px; /* Reduced spacing */
-  align-items: flex-start;
-  margin-left: 100px;
-}
 </style>
 
+<div class="form-container">
+  <h2 class="form-title">Qu'annoncez-vous aujourd'hui ?</h2>
+  <p class="form-subtitle">Grâce à ces informations les acheteurs peuvent trouver votre annonce plus facilement</p>
 
-
-<div class="maincontainer">
-<%= form_with(model: announcement, 
-              url: announcement.persisted? ? announcement_path(announcement) : announcement_index_path, 
-              local: true, 
-              html: { class: "announcement-form" }) do |form| %>
-  <h2>Qu'annoncez-vous aujourd'hui ?</h2>
-  <p class="login-description">Grâce à ces informations les acheteurs peuvent trouver votre annonce plus facilement</p>
-  
-  <% if announcement.errors.any? %>
-    <div class="announcement-form-error">
-      <h2><%= pluralize(announcement.errors.count, "error") %> prohibited this announcement from being saved:</h2>
-      <ul>
-        <% announcement.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <!-- Required Fields -->
-  <div class="announcement-form-field">
-    <%= form.label :title do %>
-      Titre <span style="color: red;">*</span>
-    <% end %>
-    <%= form.text_field :title, required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-  </div>  
-
-  <div class="announcement-form-field">
-    <%= form.label :description do %>
-      Description <span style="color: red;">*</span>
-    <% end %>
-    <%= form.text_area :description, rows: 5, required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-  </div>
-
-  <div class="announcement-form-group">
-    <div class="announcement-form-field">
-      <%= form.label :price do %>
-        Prix <span style="color: red;">*</span>
-      <% end %>
-      <%= form.number_field :price, step: 0.01, required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-    </div>
-    <div class="announcement-form-field">
-      <%= form.label :currency do %>
-        Devise <span style="color: red;">*</span>
-      <% end %>
-      <%= form.select :currency, ['MAD','USD', 'EUR', 'GBP', 'JPY', 'CAD'], {}, { required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" } %>
-    </div>
-    <div class="announcement-form-field">
-      <%= form.label :condition do %>
-        État <span style="color: red;">*</span>
-      <% end %>
-      <%= form.select :condition, ['New', 'Used', 'Refurbished'], {}, { required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" } %>
-    </div>
-  </div>
-
-  <div class="announcement-form-group">
-    <div class="announcement-form-field">
-      <%= form.label :category do %>
-        Catégorie <span style="color: red;">*</span>
-      <% end %>
-      <%= form.select :category, ['Market', 'Vehicules', 'Immobilier', 'Entreprise'], { prompt: "Sélectionnez une catégorie" }, { id: 'category-select', required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" } %>
-    </div>
-    <div class="announcement-form-field">
-      <%= form.label :subcategory do %>
-        Sous-catégorie <span style="color: red;">*</span>
-      <% end %>
-      <%= form.select :subcategory, [], { prompt: "Sélectionnez une sous-catégorie" }, { id: 'subcategory-select', required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" } %>
-    </div>
-  </div>
-
-  <div class="announcement-form-group">
-    <div class="announcement-form-field">
-      <%= form.label :city do %>
-        Ville <span style="color: red;">*</span>
-      <% end %>
-      <%= form.text_field :city, required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-    </div>
-    <div class="announcement-form-field">
-      <%= form.label :region %>
-      <%= form.text_field :region, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-    </div>
-  </div>
-
-  <!-- Optional Fields -->
-  <div class="announcement-form-group">
-    <div class="announcement-form-field">
-      <%= form.label :seller_name %>
-      <%= form.text_field :seller_name, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-    </div>
-    <div class="announcement-form-field">
-      <%= form.label :phone_number do %>
-        Téléphone <span style="color: red;">*</span>
-      <% end %>
-      <%= form.telephone_field :phone_number, required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-    </div>
-    <div class="announcement-form-field">
-      <%= form.label :email do %>
-        Email <span style="color: red;">*</span>
-      <% end %>
-      <%= form.email_field :email, required: true, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-    </div>
-  </div>
-
-  <div class="announcement-form-field">
-    <%= form.label :images do %>
-      Images <span style="color: red;">*</span>
-    <% end %>
-    <%= form.file_field :images, multiple: true, direct_upload: true, required: true %>
+  <%= form_with(model: announcement, local: true, html: { multipart: true }) do |form| %>
     <% if announcement.images.attached? %>
-      <div class="announcement-form-images">
+      <div class="carousel-container">
         <% announcement.images.each do |image| %>
-          <%= image_tag image.variant(resize_to_limit: [500, 500]), class: "announcement-form-image" %>
+          <div class="carousel-image-wrapper">
+            <%= image_tag image.variant(resize_to_limit: [150, 150]), class: "carousel-image" %>
+          </div>
         <% end %>
       </div>
     <% end %>
-  </div>
 
-  <!-- More Optional Fields -->
-  <div class="announcement-form-field">
-    <%= form.label :video_url %>
-    <%= form.url_field :video_url, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :title, 'Titre *' %>
+      <%= form.text_field :title, class: 'form-control', required: true %>
+    </div>
 
-  <div class="announcement-form-field">
-    <%= form.label :expires_at %>
-    <%= form.date_field :expires_at, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :description, 'Description *' %>
+      <%= form.text_area :description, class: 'form-control', rows: 10, required: true %>
+    </div>
 
-  <div class="announcement-form-actions">
-    <%= form.submit "Publier l'annonce", style: "background-color: #017B40; color: white; padding: 12px 24px; border: none; border-radius: 30px; font-weight: 600; cursor: pointer;" %>
-  </div>
-<% end %>
+    <div class="d-flex gap-3 mb-3">
+      <div class="flex-fill">
+        <%= form.label :price, 'Prix *' %>
+        <%= form.text_field :price, class: 'form-control', required: true %>
+      </div>
 
-<div class="info-box">
-  <h3 class="info-title">💡 Comment définir mon annonce</h3>
+      <div class="flex-fill">
+        <%= form.label :currency, 'Devise *' %>
+        <%= form.select :currency, ['MAD', 'USD', 'EUR'], {}, class: 'form-control', required: true %>
+      </div>
 
-  <div class="info-content">
-    <p>Choisir la bonne catégorie lors de l'insertion d'une annonce peut aider à augmenter la visibilité, la pertinence et l'efficacité, et éviter tout potentiel refus.</p>
-    <p>Il est important d'inclure une adresse postale claire et précise pour que les clients potentiels puissent facilement vous trouver.</p>
-    <p>Assurez-vous d'inclure un numéro de téléphone auquel les clients potentiels peuvent vous joindre.</p>
-    <p>Gardez vos coordonnées à jour.</p>
-  </div>
+      <div class="flex-fill">
+        <%= form.label :state, 'État *' %>
+        <%= form.select :state, ['Used', 'New'], {}, class: 'form-control', required: true %>
+      </div>
+    </div>
 
-  <div class="info-footer">
-    <a href="#">Termes et conditions d’annonce</a>
-  </div>
+    <div class="d-flex gap-3 mb-3">
+      <div class="flex-fill">
+        <%= form.label :category, 'Catégorie *' %>
+        <%= form.text_field :category, class: 'form-control', required: true %>
+      </div>
+
+      <div class="flex-fill">
+        <%= form.label :subcategory, 'Sous-catégorie *' %>
+        <%= form.text_field :subcategory, class: 'form-control', required: true %>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :images, 'Ajouter des images' %>
+      <%= form.file_field :images, multiple: true, direct_upload: true, class: 'form-control' %>
+    </div>
+
+    <%= form.submit 'Publier une annonce', class: 'btn btn-primary' %>
+  <% end %>
 </div>
-
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const categorySelect = document.getElementById('category-select');
-  const subcategorySelect = document.getElementById('subcategory-select');
-
-  if (!categorySelect || !subcategorySelect) return;
-
-  const subcategories = {
-    'Vehicules': ['voiture', 'moto', 'velo', 'bateau', 'camion'],
-    'Immobilier': ['vente', 'location', 'colocation', 'location de vacance'],
-    'Market': ['informatique', 'equipement bebe', 'maison jardin', 'animalerie', 'jardin', 'habillement', 'sport'],
-    'Entreprise': ['emploi', 'service', 'stage', 'buisness']
-  };
-
-  function updateSubcategories() {
-    const selectedCategory = categorySelect.value;
-    const availableSubcategories = subcategories[selectedCategory] || [];
-
-    subcategorySelect.innerHTML = '<option value="">Select a subcategory</option>';
-
-    availableSubcategories.forEach(subcategory => {
-      const option = document.createElement('option');
-      option.value = subcategory;
-      option.textContent = subcategory;
-      subcategorySelect.appendChild(option);
-    });
-  }
-
-  categorySelect.addEventListener('change', updateSubcategories);
-  updateSubcategories();
-});
-</script>

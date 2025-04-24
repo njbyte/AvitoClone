@@ -1,59 +1,192 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/navbar' %>
 
-<% if @announcement %>
-  <div class="announcement-details">
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f7f7;
+}
+
+.announcement-page {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3;
+}
+
+.btn-back {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.btn-back:hover {
+  background-color: #ddd;
+}
+
+.announcement-card {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.announcement-card h1 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.price-and-condition {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4em;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.price {
+  color: #e60000;
+}
+
+.condition {
+  background-color: #f5f5f5;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  color: #666;
+}
+
+.announcement-gallery {
+  margin-bottom: 25px;
+}
+
+.gallery-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.carousel-item {
+  min-width: 220px;
+  flex-shrink: 0;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+
+.announcement-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.announcement-description {
+  margin-top: 25px;
+  font-size: 1em;
+  color: #444;
+}
+
+.announcement-description h3 {
+  margin-bottom: 10px;
+}
+
+.seller-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.seller-section h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+</style>
+
+<div class="announcement-page">
+
+  <!-- Top Buttons -->
+  <div class="actions">
+    <%= link_to 'Edit', edit_announcement_path(@announcement), class: "btn btn-edit" %>
+    <%= link_to 'Back', announcement_index_path, class: "btn btn-back" %>
+  </div>
+
+  <!-- Announcement Box -->
+  <div class="announcement-card">
     <h1><%= @announcement.title %></h1>
-    
-    <!-- Price and Condition -->
-    <div class="price-condition">
+
+    <div class="price-and-condition">
       <span class="price"><%= number_to_currency(@announcement.price, unit: @announcement.currency) %></span>
       <span class="condition"><%= @announcement.condition %></span>
     </div>
-    
-    <!-- Images Gallery -->
+
     <% if @announcement.images.attached? %>
-  <div class="image-gallery">
-    <h3>Product Images</h3>
-    <div class="images-container">
-      <% @announcement.images.each do |image| %>
-        <div class="image-item">
-          <%= image_tag image.variant(resize_to_limit: [500, 500]), class: "announcement-image" %>
-          
+      <div class="announcement-gallery">
+        <div class="gallery-carousel">
+          <% @announcement.images.each do |image| %>
+            <div class="carousel-item">
+              <%= image_tag image.variant(resize_to_limit: [500, 500]), class: "carousel-image" %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
+    <% end %>
+
+    <div class="announcement-meta">
+      <span><strong>Category:</strong> <%= @announcement.category %> / <%= @announcement.subcategory %></span>
+      <span><strong>Location:</strong> <%= @announcement.city %>, <%= @announcement.region %></span>
+      <span><strong>Published:</strong> <%= time_ago_in_words(@announcement.published_at) %> ago</span>
+      <span><strong>Views:</strong> <%= @announcement.views_count %></span>
     </div>
-  </div>
-<% end %>
-    
-    <!-- Other details -->
-    <div class="meta">
-      <span class="category"><%= @announcement.category %> / <%= @announcement.subcategory %></span>
-      <span class="location"><%= @announcement.city %>, <%= @announcement.region %></span>
-      <span class="published">Published <%= time_ago_in_words(@announcement.published_at) %> ago</span>
-      <span class="views"><%= @announcement.views_count %> views</span>
-    </div>
-    
-    <div class="description">
+
+    <div class="announcement-description">
       <h3>Description</h3>
       <%= simple_format(@announcement.description) %>
     </div>
-    
-   
-    
-    <!-- Seller Information -->
-    <div class="seller-info">
+
+    <div class="seller-section">
       <h3>Seller Information</h3>
       <p><strong>Name:</strong> <%= @announcement.seller_name %></p>
       <p><strong>Phone:</strong> <%= @announcement.phone_number %></p>
       <p><strong>Email:</strong> <%= mail_to @announcement.email %></p>
     </div>
   </div>
-  
-  <div class="actions">
-    <%= link_to 'Edit', edit_announcement_path(@announcement), class: "btn btn-edit" %>
-    <%= link_to 'Back', announcement_index_path, class: "btn btn-back" %>
-  </div>
-<% else %>
-  <p class="alert">Announcement not found</p>
-  <%= link_to 'Back to announcements', announcement_index_path, class: "btn btn-back" %>
-<% end %>
+
+</div>

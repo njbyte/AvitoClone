@@ -1,4 +1,32 @@
 <style>
+.card-actions-page a,
+.card-actions-page form button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.85em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.card-actions-page a {
+  color: #fff;
+}
+
+.card-actions-page a.show-btn { background-color: #28a745; }
+.card-actions-page a.edit-btn { background-color: #ffc107; color: #000; }
+.card-actions-page form button.delete-btn { background-color: #dc3545; color: #fff; }
+
+.card-actions-page a:hover,
+.card-actions-page form button:hover {
+  opacity: 0.9;
+}
+
   .horizontal-scroll-container {
     display: flex;
     overflow-x: auto;
@@ -171,21 +199,15 @@
 
   <div class="main-page">
     <div class="content-page">
-      <% banner_image = case params[:category]
-        when 'Véhicules' then 'vehicle_banner.png'
-        when 'Immobilier' then 'image2.png'
-        when 'Marketplace' then 'marketplace_banner.png'
-        when 'Emplois et Services' then 'jobs_banner.png'
-        else 'adimage.svg'
-      end %>
+      
 
-      <%= image_tag banner_image, class: "adimage", alt: "MyAvito - #{params[:category] || 'Toutes les catégories'}" %>
+      <%= image_tag 'adimage.svg', class: "adimage", alt: "MyAvito - #{params[:category] || 'Toutes les catégories'}" %>
       
       
       <% @announcements.group_by(&:category).each do |category, grouped_announcements| %>
         <% category_image = case category
           when 'Immobilier' then 'icons/category_1000.svg'
-          when 'vehicule' then 'icons/category_2000.svg'
+          when 'Vehicules' then 'icons/category_2000.svg'
           when 'Marketplace' then 'icons/category_7100.svg'
           when 'Emplois et Services' then 'icons/category_6000.svg'
           else 'icons/category_1000.svg'
