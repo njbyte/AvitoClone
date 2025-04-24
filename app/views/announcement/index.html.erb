@@ -210,22 +210,26 @@
   <%= render 'layouts/navbar' %>
 
   <div class="category-filters">
-    <%= link_to announcement_index_path(category: 'Immobilier'), class: "category-card immobilier" do %>
-      <%= image_tag 'icons/category_1000.svg', class: 'filter-icon' %><span>Immobilier</span>
-    <% end %>
+  <%= link_to announcement_index_path(category: 'Immobilier'), class: "category-card immobilier" do %>
+    <%= image_tag 'icons/category_1000.svg', class: 'filter-icon' %>
+    <span>Immobilier</span>
+  <% end %>
 
-    <%= link_to announcement_index_path(category: 'Véhicules'), class: "category-card vehicules" do %>
-      <%= image_tag 'icons/category_2000.svg', class: 'filter-icon' %><span>Véhicules</span>
-    <% end %>
+  <%= link_to announcement_index_path(category: 'Vehicules'), class: "category-card vehicules" do %>
+    <%= image_tag 'icons/category_2000.svg', class: 'filter-icon' %>
+    <span>Véhicules</span>
+  <% end %>
 
-    <%= link_to announcement_index_path(category: 'Marketplace'), class: "category-card marketplace" do %>
-      <%= image_tag 'icons/category_7100.svg', class: 'filter-icon' %><span>Marketplace</span>
-    <% end %>
+  <%= link_to announcement_index_path(category: 'Market'), class: "category-card marketplace" do %>
+    <%= image_tag 'icons/category_7100.svg', class: 'filter-icon' %>
+    <span>Marketplace</span>
+  <% end %>
 
-    <%= link_to announcement_index_path(category: 'Emplois et Services'), class: "category-card emplois" do %>
-      <%= image_tag 'icons/category_6000.svg', class: 'filter-icon' %><span>Emplois et Services</span>
-    <% end %>
-  </div>
+  <%= link_to announcement_index_path(category: 'Entreprise'), class: "category-card emplois" do %>
+    <%= image_tag 'icons/category_6000.svg', class: 'filter-icon' %>
+    <span>Emplois et Services</span>
+  <% end %>
+</div>
 
   <div class="main-page">
     <div class="content-page">
