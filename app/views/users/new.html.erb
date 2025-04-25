@@ -1,0 +1,41 @@
+<%= render 'layouts/navbar' %>
+
+
+
+
+<div class="login-page-container">
+  <div class="hero-section">
+    <div class="hero-image">
+      <%= image_tag "crea.svg", alt: "MyAvito" %>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <h2>Créer un compte</h2>
+    <p class="login-description">Renseignez vos informations pour créer un compte</p>
+
+    <%= form_with model: @user, url: users_path, local: true do |form| %>
+      <div class="form-section">
+        <%= form.label :nom, "Nom", class: "form-label" %>
+        <%= form.text_field :nom, class: "form-control", placeholder: "Votre nom" %>
+      </div>
+
+      <div class="form-section">
+        <%= form.label :prenom, "Prénom", class: "form-label" %>
+        <%= form.text_field :prenom, class: "form-control", placeholder: "Votre prénom" %>
+      </div>
+
+      <div class="form-section">
+        <%= form.label :email_address, "Email", class: "form-label" %>
+        <%= form.email_field :email_address, class: "form-control", placeholder: "Votre email" %>
+      </div>
+
+      <div class="form-section">
+        <%= form.label :password, "Mot de passe", class: "form-label" %>
+        <%= form.password_field :password, class: "form-control", placeholder: "Votre mot de passe" %>
+      </div>
+
+      <%= form.submit "Créer un compte", class: "continue-btn" %>
+    <% end %>
+  </div>
+</div>

@@ -197,4 +197,20 @@
     .login-container h2 {
       font-size: 20px;
     }
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.95em;
+    }
+    
+    .signup-button {
+      color: #FF4C59;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    .signup-button:hover {
+      text-decoration: underline;
+    }
+    
   }  
