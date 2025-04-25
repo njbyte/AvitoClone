@@ -5,11 +5,21 @@ class AnnouncementController < ApplicationController
     before_action :authorize_user!, only: [:edit, :update, :destroy]
     
     def index
-      if params[:category].present?
-        @announcements = Announcement.where(category: params[:category])
-      
-      else
-        @announcements = Announcement.all
+      @announcements = Announcement.all
+    
+      if params[:query].present?
+        
+        @announcements = @announcements.where("title ILIKE ?", "%#{params[:query]}%")
+      end
+    
+      if params[:category].present? && params[:category] != "Toutes les catégories"
+        
+        @announcements = @announcements.where(category: params[:category])
+      end
+    
+      if params[:city].present? && params[:city] != "Choisir ville - secteur"
+        
+        @announcements = @announcements.where(city: params[:city])
       end
     end
   
