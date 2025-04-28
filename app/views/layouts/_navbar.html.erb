@@ -1,3 +1,40 @@
+
+<div class="navbar">
+  <!-- Left: Logo -->
+  <%= link_to root_path, class: "logo" do %>
+    <%= image_tag "new-logo.svg", alt: "MyAvito", class: "logo-img" %>
+  <% end %>
+
+  <!-- Center: Search -->
+  
+
+  <!-- Right: Buttons -->
+  <div class="navbar-section right">
+  <% if authenticated? %>
+  <%= link_to myannounce_announcement_index_path, class: "navbar-announce-link" do %>
+    <%= image_tag "icons/announce.svg", alt: "Mes annonces", class: "navbar-announce-icon" %>
+    <span>Mes annonces</span>
+  <% end %>
+    
+     <%= link_to new_announcement_path, class: "publish-button" do %>
+  <%= image_tag "icons/add_icon.svg", alt: "addicon", style: "width: 20px; height: 20px;" %>
+
+  <span>Publier une annonce</span>
+<% end %>
+    <%= button_to session_path, method: :delete, data: { confirm: "Êtes-vous sûr de vouloir vous déconnecter ?" }, class: "logout-button", form: { style: "display: inline;" } do %>
+  <%= image_tag "icons/logout.svg", alt: "Logout", class: "logout-icon" %>
+  <span>Se Déconnecter</span>
+<% end %>
+
+    <% else %>
+    <%= link_to new_session_path, class: "login-button" do %>
+      <%= image_tag "icons/login.svg", alt: "Login", class: "login-icon" %>
+      <span>Se connecter</span>
+    <% end %>
+    <% end %>
+   
+  </div>
+</div>
 <style>
   .loginlink {
       color: black;
@@ -128,115 +165,78 @@
       }
 
 
-.navbar-announce-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background-color: white;
-  color: black;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
+  .navbar-announce-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
 
-.navbar-announce-link:hover {
-  background-color: #FFC71F;
-}
+  .navbar-announce-link:hover {
+    background-color: #FFC71F;
+  }
 
-.navbar-announce-icon {
-  width: 18px;
-  height: 18px;
-}
-.logout-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: #f8f9fa;
-  color: black;
-  font-size: 1em;
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-  margin-right: 50px;
-}
+  .navbar-announce-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .logout-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f8f9fa;
+    color: black;
+    font-size: 1em;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    margin-right: 50px;
+  }
 
-.logout-button:hover {
-  background-color: #ffc107;
-  color: #000;
-}
+  .logout-button:hover {
+    background-color: #ffc107;
+    color: #000;
+  }
 
-.logout-button span {
-  font-weight: 500;
-}
+  .logout-button span {
+    font-weight: 500;
+  }
 
-.logout-icon {
-  width: 18px;
-  height: 18px;
-}
-.login-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: #f8f9fa;
-  color: #333;
-  font-size: 1em;
-  padding: 8px 14px;
-  border-radius: 20px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
+  .logout-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .login-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f8f9fa;
+    color: #333;
+    font-size: 1em;
+    padding: 8px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  margin-right: 50px;}
 
-.login-button:hover {
-  background-color: #17a2b8;
-  color: #fff;
-}
+  .login-button:hover {
+    background-color: #17a2b8;
+    color: #fff;
+  }
 
-.login-icon {
-  width: 18px;
-  height: 18px;
-}
+  .login-icon {
+    width: 18px;
+    height: 18px;
+  }
 
 </style>
-
-<div class="navbar">
-  <!-- Left: Logo -->
-  <%= link_to root_path, class: "logo" do %>
-    <%= image_tag "new-logo.svg", alt: "MyAvito", class: "logo-img" %>
-  <% end %>
-
-  <!-- Center: Search -->
-  
-
-  <!-- Right: Buttons -->
-  <div class="navbar-section right">
-  <% if authenticated? %>
-  <%= link_to myannounce_announcement_index_path, class: "navbar-announce-link" do %>
-    <%= image_tag "icons/announce.svg", alt: "Mes annonces", class: "navbar-announce-icon" %>
-    <span>Mes annonces</span>
-  <% end %>
-    
-     <%= link_to new_announcement_path, class: "publish-button" do %>
-  <%= image_tag "icons/add_icon.svg", alt: "addicon", style: "width: 20px; height: 20px;" %>
-
-  <span>Publier une annonce</span>
-<% end %>
-    <%= button_to session_path, method: :delete, data: { confirm: "Êtes-vous sûr de vouloir vous déconnecter ?" }, class: "logout-button", form: { style: "display: inline;" } do %>
-  <%= image_tag "icons/logout.svg", alt: "Logout", class: "logout-icon" %>
-  <span>Se Déconnecter</span>
-<% end %>
-
-    <% else %>
-    <%= link_to new_session_path, class: "login-button" do %>
-      <%= image_tag "icons/login.svg", alt: "Login", class: "login-icon" %>
-      <span>Se connecter</span>
-    <% end %>
-    <% end %>
-   
-  </div>
-</div>
